@@ -1,0 +1,247 @@
+body {
+  background-color: gray;
+}
+.btn-seal {
+  padding: 14px 32px;
+  font-family: "Philosopher", sans-serif;
+  font-weight: 700;
+  color: #e0a800;
+  background: #1a1a2e;
+  border: 2px solid #8a2be2;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(138, 43, 226, 0.5),
+    inset 0 0 5px rgba(224, 168, 0, 0.3);
+  transition: all 0.4s ease;
+}
+
+.btn-seal:hover {
+  background: #16213e;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.8),
+    inset 0 0 10px rgba(224, 168, 0, 0.5);
+  text-shadow: 0 0 5px #e0a800;
+}
+
+.btn-seal::before {
+  content: "✧";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.btn-seal:hover::before {
+  opacity: 1;
+  top: -5px;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--gold);
+  font-size: 1.1rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  margin: 8px 0;
+  border: 1px solid #8a2be2;
+  border-radius: 4px;
+  background: rgba(26, 26, 46, 0.8);
+  color: white;
+  font-family: "Philosopher", sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(224, 168, 0, 0.5);
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0a800'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(138, 43, 226, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+  }
+}
+
+.form-container {
+  animation: glow 5s infinite ease-in-out;
+}
+:root {
+  --dark-purple: #1a1a2e;
+  --magic-purple: #8a2be2;
+  --gold: #e0a800;
+  --deep-blue: #16213e;
+}
+
+body {
+  background: url("https://i.imgur.com/JQK10bg.jpg") no-repeat center center
+    fixed;
+  background-size: cover;
+  color: #f0f0f0;
+  font-family: "Philosopher", sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+}
+
+.form-container {
+  background: rgba(26, 26, 46, 0.9);
+  border: 2px solid var(--magic-purple);
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 0 25px rgba(138, 43, 226, 0.6),
+    inset 0 0 15px rgba(224, 168, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-container::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.form-title {
+  color: var(--gold);
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(224, 168, 0, 0.7);
+  letter-spacing: 1px;
+}
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.btn-back {
+  background: none;
+  border: 1px solid var(--magic-purple);
+  color: var(--gold);
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background: rgba(138, 43, 226, 0.2);
+}
+
+.checkbox-group,
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-group label,
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: auto;
+  accent-color: var(--magic-purple);
+}
+
+.form-input[type="number"]::-webkit-outer-spin-button,
+.form-input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.file-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #1a1a2e;
+  color: #e0a800;
+  border: 2px solid #8a2be2;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: "Philosopher", sans-serif;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.file-upload-btn:hover {
+  background: #2c2c54;
+  box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+.file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.file-icon {
+  font-size: 1.2em;
+}
+
+.file-name {
+  display: block;
+  margin-top: 8px;
+  color: #aaa;
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+/* Для отображения выбранных файлов */
+.file-list {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #e0a800;
+}
