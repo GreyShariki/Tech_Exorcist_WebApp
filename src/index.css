@@ -1,7 +1,71 @@
-body {
-  background-color: gray;
+:root {
+  --dark-purple: #1a1a2e;
+  --magic-purple: #8a2be2;
+  --gold: #e0a800;
+  --deep-blue: #16213e;
 }
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Philosopher", sans-serif;
+  background: var(--dark-purple);
+  color: #f0f0f0;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Контейнеры */
+.app-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container {
+  background: rgba(26, 26, 46, 0.95);
+  border: 2px solid var(--magic-purple);
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 8px 0;
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.6),
+    inset 0 0 10px rgba(224, 168, 0, 0.3);
+}
+.form-container::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+/* Кнопки главного меню */
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 16px;
+}
+
 .btn-seal {
+  width: 100%;
   padding: 14px 32px;
   font-family: "Philosopher", sans-serif;
   font-weight: 700;
@@ -16,14 +80,12 @@ body {
     inset 0 0 5px rgba(224, 168, 0, 0.3);
   transition: all 0.4s ease;
 }
-
 .btn-seal:hover {
   background: #16213e;
   box-shadow: 0 0 20px rgba(138, 43, 226, 0.8),
     inset 0 0 10px rgba(224, 168, 0, 0.5);
   text-shadow: 0 0 5px #e0a800;
 }
-
 .btn-seal::before {
   content: "✧";
   position: absolute;
@@ -33,20 +95,24 @@ body {
   opacity: 0;
   transition: all 0.3s ease;
 }
-
 .btn-seal:hover::before {
   opacity: 1;
   top: -5px;
 }
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
+  width: 100%;
 }
-
+.form-input[type="number"]::-webkit-outer-spin-button,
+.form-input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Chrome/Safari */
+  margin: 0;
+}
 .form-label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   color: var(--gold);
-  font-size: 1.1rem;
+  font-size: 16px;
 }
 
 .form-input,
@@ -54,15 +120,15 @@ body {
 .form-textarea {
   width: 100%;
   box-sizing: border-box;
-  padding: 10px 12px;
-  margin: 8px 0;
-  border: 1px solid #8a2be2;
-  border-radius: 4px;
-  background: rgba(26, 26, 46, 0.8);
+  padding: 12px 14px;
+  margin: 6px 0;
+  border: 1px solid var(--magic-purple);
+  border-radius: 8px;
+  background: rgba(22, 33, 62, 0.8);
   color: white;
   font-family: "Philosopher", sans-serif;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  font-size: 16px;
+  transition: all 0.2s ease;
 }
 
 .form-input:focus,
@@ -70,15 +136,16 @@ body {
 .form-textarea:focus {
   outline: none;
   border-color: var(--gold);
-  box-shadow: 0 0 10px rgba(224, 168, 0, 0.5);
+  box-shadow: 0 0 8px rgba(224, 168, 0, 0.5);
 }
 
 .form-select {
   appearance: none;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0a800'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 20px;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 36px;
 }
 
 .form-textarea {
@@ -86,139 +153,72 @@ body {
   resize: vertical;
 }
 
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(138, 43, 226, 0.9);
-  }
-  100% {
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
-  }
-}
-
-.form-container {
-  animation: glow 5s infinite ease-in-out;
-}
-:root {
-  --dark-purple: #1a1a2e;
-  --magic-purple: #8a2be2;
-  --gold: #e0a800;
-  --deep-blue: #16213e;
-}
-
-body {
-  background: url("https://i.imgur.com/JQK10bg.jpg") no-repeat center center
-    fixed;
-  background-size: cover;
-  color: #f0f0f0;
-  font-family: "Philosopher", sans-serif;
-  min-height: 100vh;
-  margin: 0;
-  padding: 2rem;
-}
-
-.form-container {
-  background: rgba(26, 26, 46, 0.9);
-  border: 2px solid var(--magic-purple);
-  border-radius: 15px;
-  padding: 2rem;
-  max-width: 600px;
-  margin: 2rem auto;
-  box-shadow: 0 0 25px rgba(138, 43, 226, 0.6),
-    inset 0 0 15px rgba(224, 168, 0, 0.4);
-  position: relative;
-  overflow: hidden;
-}
-
-.form-container::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  border: 1px solid var(--gold);
-  border-radius: 20px;
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-.form-title {
-  color: var(--gold);
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-shadow: 0 0 10px rgba(224, 168, 0, 0.7);
-  letter-spacing: 1px;
-}
 .form-actions {
   display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .btn-back {
   background: none;
   border: 1px solid var(--magic-purple);
   color: var(--gold);
-  padding: 0.8rem 1.5rem;
+  padding: 12px;
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-back:hover {
-  background: rgba(138, 43, 226, 0.2);
+  font-family: "Philosopher", sans-serif;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .checkbox-group,
 .radio-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 10px;
+  margin-top: 8px;
 }
 
 .checkbox-group label,
 .radio-group label {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
   cursor: pointer;
+  font-size: 15px;
 }
 
 input[type="checkbox"],
 input[type="radio"] {
-  width: auto;
+  width: 18px;
+  height: 18px;
   accent-color: var(--magic-purple);
 }
 
-.form-input[type="number"]::-webkit-outer-spin-button,
-.form-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.file-upload-wrapper {
+  margin-top: 12px;
 }
+
 .file-upload-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 10px 20px;
-  background: #1a1a2e;
-  color: #e0a800;
-  border: 2px solid #8a2be2;
+  padding: 12px 16px;
+  background: var(--dark-purple);
+  color: var(--gold);
+  border: 2px solid var(--magic-purple);
   border-radius: 50px;
   cursor: pointer;
   font-family: "Philosopher", sans-serif;
-  transition: all 0.3s ease;
-  margin-top: 8px;
+  font-weight: 700;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.file-upload-btn:hover {
-  background: #2c2c54;
-  box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
-}
 .file-input {
   width: 0.1px;
   height: 0.1px;
@@ -227,21 +227,37 @@ input[type="radio"] {
   position: absolute;
   z-index: -1;
 }
-.file-icon {
-  font-size: 1.2em;
-}
 
 .file-name {
   display: block;
   margin-top: 8px;
   color: #aaa;
-  font-size: 0.9em;
+  font-size: 14px;
   font-style: italic;
 }
 
-/* Для отображения выбранных файлов */
-.file-list {
-  margin-top: 10px;
-  font-size: 0.9em;
-  color: #e0a800;
+/* Анимации */
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.9);
+  }
+}
+
+@media (max-width: 360px) {
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  .btn-seal,
+  .btn-back {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
 }

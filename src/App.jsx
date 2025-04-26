@@ -9,11 +9,12 @@ import { OtherForm } from "./components/Another";
 const tg = window.Telegram.WebApp;
 function App() {
   useEffect(() => {
-    tg.ready();
+    if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.expand();
+      window.Telegram.WebApp.enableClosingConfirmation();
+    }
   }, []);
-  const onClose = () => {
-    tg.close();
-  };
+
   const [activeTab, setActiveTab] = useState(null);
 
   const renderForm = () => {
@@ -35,7 +36,7 @@ function App() {
               className="btn-seal"
               onClick={() => setActiveTab("office")}
             >
-              Проблемы с 1С
+              Пополнение расходников
             </MyButton>
             <MyButton className="btn-seal" onClick={() => setActiveTab("tech")}>
               Техническое оборудование
