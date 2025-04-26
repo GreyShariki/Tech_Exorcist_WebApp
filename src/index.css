@@ -4,7 +4,10 @@
   --gold: #e0a800;
   --deep-blue: #16213e;
 }
-
+* {
+  margin: 0px;
+  padding: 0px;
+}
 html,
 body {
   height: 100%;
@@ -18,7 +21,6 @@ body {
 }
 
 #root {
-  min-height: 100%;
   display: flex;
   flex-direction: column;
   padding: 12px;
@@ -26,11 +28,6 @@ body {
 }
 
 /* Контейнеры */
-.app-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
 
 .form-container {
   background: rgba(26, 26, 46, 0.95);
@@ -56,17 +53,19 @@ body {
   pointer-events: none;
 }
 .buttons-container {
+  height: auto;
   display: flex;
   flex-direction: column;
-  flex: 1;
   justify-content: space-evenly;
   gap: 12px;
   width: 100%;
-  margin-top: 16px;
+  margin-top: 0px;
 }
 .btn-menu {
   padding: 24px 32px !important;
-  font-size: 16px;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .btn-seal {
   width: 100%;
