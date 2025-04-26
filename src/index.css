@@ -64,13 +64,15 @@ body {
   width: 100%;
   margin-top: 16px;
 }
-
+.btn-menu {
+  padding: 24px 32px !important;
+  font-size: 16px;
+}
 .btn-seal {
   width: 100%;
-  padding: 24px 32px;
+  padding: 16px 32px;
   font-family: "Philosopher", sans-serif;
   font-weight: 700;
-  font-size: 16px;
   color: #e0a800;
   background: #1a1a2e;
   border: 2px solid #8a2be2;

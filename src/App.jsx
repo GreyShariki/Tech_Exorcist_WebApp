@@ -33,28 +33,31 @@ function App() {
         return (
           <div className="buttons-container">
             <MyButton
-              className="btn-seal"
+              className="btn-seal btn-menu"
               onClick={() => setActiveTab("office")}
             >
               Пополнение расходников
             </MyButton>
-            <MyButton className="btn-seal" onClick={() => setActiveTab("tech")}>
+            <MyButton
+              className="btn-seal btn-menu"
+              onClick={() => setActiveTab("tech")}
+            >
               Техническое оборудование
             </MyButton>
             <MyButton
-              className="btn-seal"
+              className="btn-seal btn-menu"
               onClick={() => setActiveTab("internet")}
             >
               Сеть и интернет
             </MyButton>
             <MyButton
-              className="btn-seal"
+              className="btn-seal btn-menu"
               onClick={() => setActiveTab("admin")}
             >
               Доступы и права
             </MyButton>
             <MyButton
-              className="btn-seal"
+              className="btn-seal btn-menu"
               onClick={() => setActiveTab("another")}
             >
               Другое
