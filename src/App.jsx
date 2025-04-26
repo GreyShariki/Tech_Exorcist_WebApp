@@ -64,7 +64,11 @@ function App() {
     }
   };
 
-  return <div className="app-container">{renderForm()}</div>;
+  return (
+    <div className="app-container" style={{ minHeight: tg.viewportHeight }}>
+      {renderForm()}
+    </div>
+  );
 }
 
 export default App;
