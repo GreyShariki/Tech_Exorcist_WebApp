@@ -60,16 +60,17 @@ body {
   flex-direction: column;
   flex: 1;
   justify-content: space-evenly;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
   margin-top: 16px;
 }
 
 .btn-seal {
   width: 100%;
-  padding: 14px 32px;
+  padding: 24px 32px;
   font-family: "Philosopher", sans-serif;
   font-weight: 700;
+  font-size: 16px;
   color: #e0a800;
   background: #1a1a2e;
   border: 2px solid #8a2be2;
