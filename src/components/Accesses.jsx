@@ -2,10 +2,10 @@ import { useState } from "react";
 
 export const AccessForm = ({ setActiveTab }) => {
   const [formData, setFormData] = useState({
-    system: "Почта",
-    accessType: "read",
-    duration: "Постоянный",
+    accessType: "",
     justification: "",
+    lname: "",
+    fname: "",
   });
 
   const handleSubmit = (e) => {
@@ -21,22 +21,32 @@ export const AccessForm = ({ setActiveTab }) => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="form-label">
-            Система:
-            <select
-              className="form-select"
-              value={formData.system}
+            Имя:
+            <input
+              type="text"
+              className="form-input"
+              value={formData.fname}
               onChange={(e) =>
-                setFormData({ ...formData, system: e.target.value })
+                setFormData({ ...formData, fname: e.target.value })
               }
-            >
-              <option value="Почта">Почта</option>
-              <option value="ERP-система">ERP-система</option>
-              <option value="Сетевой доступ">Сетевой доступ</option>
-              <option value="Другая">Другая</option>
-            </select>
+              required
+            />
           </label>
         </div>
-
+        <div className="form-group">
+          <label className="form-label">
+            Фамилия:
+            <input
+              type="text"
+              className="form-input"
+              value={formData.lname}
+              onChange={(e) =>
+                setFormData({ ...formData, lname: e.target.value })
+              }
+              required
+            />
+          </label>
+        </div>
         <div className="form-group">
           <label className="form-label">
             Тип доступа:
@@ -45,31 +55,31 @@ export const AccessForm = ({ setActiveTab }) => {
                 <input
                   type="radio"
                   name="accessType"
-                  value="read"
-                  checked={formData.accessType === "read"}
-                  onChange={() =>
-                    setFormData({ ...formData, accessType: "read" })
-                  }
-                />
-                Только чтение
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="accessType"
-                  value="write"
+                  value="Менеджер по закупкам"
                   checked={formData.accessType === "write"}
                   onChange={() =>
                     setFormData({ ...formData, accessType: "write" })
                   }
                 />
-                Запись
+                Менеджер по закупкам
               </label>
               <label>
                 <input
                   type="radio"
                   name="accessType"
-                  value="admin"
+                  value="Системный администратор"
+                  checked={formData.accessType === "write"}
+                  onChange={() =>
+                    setFormData({ ...formData, accessType: "write" })
+                  }
+                />
+                Системный администратор
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="accessType"
+                  value="Администратор"
                   checked={formData.accessType === "admin"}
                   onChange={() =>
                     setFormData({ ...formData, accessType: "admin" })
@@ -78,24 +88,6 @@ export const AccessForm = ({ setActiveTab }) => {
                 Администратор
               </label>
             </div>
-          </label>
-        </div>
-
-        <div className="form-group">
-          <label className="form-label">
-            Срок доступа:
-            <select
-              className="form-select"
-              value={formData.duration}
-              onChange={(e) =>
-                setFormData({ ...formData, duration: e.target.value })
-              }
-            >
-              <option value="1 день">1 день</option>
-              <option value="1 неделя">1 неделя</option>
-              <option value="1 месяц">1 месяц</option>
-              <option value="Постоянный">Постоянный</option>
-            </select>
           </label>
         </div>
 

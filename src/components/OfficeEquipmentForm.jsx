@@ -5,11 +5,26 @@ export const OfficeEquipmentForm = ({ setActiveTab }) => {
   const [formData, setFormData] = useState({
     itemType: "Бумага",
     quantity: 1,
+    location: "",
   });
 
   return (
     <div className="form-container">
       <h2>Заказ расходников</h2>
+      <div className="form-group">
+        <label className="form-label">
+          Имя:
+          <input
+            type="text"
+            className="form-input"
+            value={formData.location}
+            onChange={(e) =>
+              setFormData({ ...formData, location: e.target.value })
+            }
+            required
+          />
+        </label>
+      </div>
       <div className="form-group">
         <label className="form-label">
           Что нужно:

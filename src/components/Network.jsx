@@ -1,11 +1,25 @@
 import { useState } from "react";
 
 export const NetworkForm = ({ setActiveTab }) => {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+
+      const user = tg.initDataUnsafe?.user;
+      setUserData(user);
+
+      tg.expand();
+    }
+  }, []);
   const [formData, setFormData] = useState({
     location: "Главный офис",
     connectionType: "wifi",
     symptoms: [],
     description: "",
+    chat_id: userData,
+    startTime: "",
   });
 
   const handleCheckboxChange = (e) => {
