@@ -1,5 +1,5 @@
 export const accessRequest = async (data) => {
-  const response = await fetch("http://87.228.82.41:3000/api/addAccess", {
+  const response = await fetch("https://87.228.82.41:3000/api/addAccess", {
     method: "POST",
     mode: "cors",
     headers: {
@@ -14,7 +14,7 @@ export const accessRequest = async (data) => {
 
 export const notifyAdmins = async (application) => {
   const response = await fetch(
-    "http://87.228.82.41:3000/api/notify/notify-access",
+    "https://87.228.82.41:3000/api/notify/notify-access",
     {
       method: "POST",
       mode: "cors",
