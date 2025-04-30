@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MyButton } from "./button";
 
 export const OfficeEquipmentForm = ({ setActiveTab }) => {
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+
+      const user = tg.initDataUnsafe?.user;
+      setUserData(user);
+
+      tg.expand();
+    }
+  }, []);
   const [formData, setFormData] = useState({
     itemType: "Бумага",
     quantity: 1,
     location: "",
+    chat_id: userData,
   });
 
   return (
@@ -13,7 +25,7 @@ export const OfficeEquipmentForm = ({ setActiveTab }) => {
       <h2>Заказ расходников</h2>
       <div className="form-group">
         <label className="form-label">
-          Имя:
+          Локация:
           <input
             type="text"
             className="form-input"

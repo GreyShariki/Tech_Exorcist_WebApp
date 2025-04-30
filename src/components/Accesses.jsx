@@ -1,11 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const AccessForm = ({ setActiveTab }) => {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+
+      const user = tg.initDataUnsafe?.user;
+      setUserData(user);
+
+      tg.expand();
+    }
+  }, []);
   const [formData, setFormData] = useState({
     accessType: "",
     justification: "",
     lname: "",
     fname: "",
+    chat_id: userData,
   });
 
   const handleSubmit = (e) => {
@@ -56,9 +69,12 @@ export const AccessForm = ({ setActiveTab }) => {
                   type="radio"
                   name="accessType"
                   value="Менеджер по закупкам"
-                  checked={formData.accessType === "write"}
+                  checked={formData.accessType === "Менеджер по закупкам"}
                   onChange={() =>
-                    setFormData({ ...formData, accessType: "write" })
+                    setFormData({
+                      ...formData,
+                      accessType: "Менеджер по закупкам",
+                    })
                   }
                 />
                 Менеджер по закупкам
@@ -68,9 +84,12 @@ export const AccessForm = ({ setActiveTab }) => {
                   type="radio"
                   name="accessType"
                   value="Системный администратор"
-                  checked={formData.accessType === "write"}
+                  checked={formData.accessType === "Системный администратор"}
                   onChange={() =>
-                    setFormData({ ...formData, accessType: "write" })
+                    setFormData({
+                      ...formData,
+                      accessType: "Системный администратор",
+                    })
                   }
                 />
                 Системный администратор

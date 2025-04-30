@@ -1,17 +1,50 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { techRequest, notifyMasters } from "./formBackend/Tech.js";
 export const EquipmentForm = ({ setActiveTab }) => {
-  const [formData, setFormData] = useState({
-    equipmentType: "Принтер",
-    inventoryNumber: "",
-    problemType: "Не функционирует",
-    description: "",
-  });
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Отправка заявки на оборудование:", formData);
-    alert("Зачарование отправлено в кузницу!");
+      const user = tg.initDataUnsafe?.user;
+      setUserData(user);
+
+      tg.expand();
+    }
+  }, []);
+  const [formData, setFormData] = useState({
+    type_of_device: "Принтер",
+    number: "",
+    type_of_failure: "Не функционирует",
+    description: "",
+    status: "На рассмотрении",
+    chat_id: null,
+  });
+  useEffect(() => {
+    if (userData?.id) {
+      setFormData((prev) => ({ ...prev, chat_id: userData.id }));
+    }
+  }, [userData]);
+  const handleSubmit = async () => {
+    if (!formData.chat_id) {
+      alert("нет чат айди");
+      return;
+    }
+    if (!formData.description || !formData.number) {
+      alert("Заполните обязательные поля!");
+      return;
+    }
+
+    try {
+      const createdApp = await techRequest(formData);
+
+      await notifyMasters(createdApp);
+
+      alert("✅ Заявка создана! Мастера уведомлены.");
+    } catch (error) {
+      console.error("Ошибка:", error);
+      alert("❌ Ошибка при создании заявки");
+    }
   };
 
   return (
@@ -24,9 +57,9 @@ export const EquipmentForm = ({ setActiveTab }) => {
             Тип оборудования:
             <select
               className="form-select"
-              value={formData.equipmentType}
+              value={formData.type_of_device}
               onChange={(e) =>
-                setFormData({ ...formData, equipmentType: e.target.value })
+                setFormData({ ...formData, type_of_device: e.target.value })
               }
             >
               <option value="ПК">ПК</option>
@@ -45,9 +78,9 @@ export const EquipmentForm = ({ setActiveTab }) => {
             <input
               type="text"
               className="form-input"
-              value={formData.inventoryNumber}
+              value={formData.number}
               onChange={(e) =>
-                setFormData({ ...formData, inventoryNumber: e.target.value })
+                setFormData({ ...formData, number: e.target.value })
               }
               required
             />
@@ -59,9 +92,9 @@ export const EquipmentForm = ({ setActiveTab }) => {
             Характер поломки:
             <select
               className="form-select"
-              value={formData.problemType}
+              value={formData.type_of_failure}
               onChange={(e) =>
-                setFormData({ ...formData, problemType: e.target.value })
+                setFormData({ ...formData, type_of_failure: e.target.value })
               }
             >
               <option value="Не функционирует">Не функционирует</option>
@@ -97,11 +130,30 @@ export const EquipmentForm = ({ setActiveTab }) => {
           >
             ← Назад
           </button>
-          <button type="submit" className="btn-seal">
+          <button type="button" onClick={handleSubmit} className="btn-seal">
             Запечатать заявку
           </button>
         </div>
       </form>
+      <div>
+        <h3>Дебажим объект:</h3>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Поле</th>
+              <th>Значение</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(formData).map(([key, value]) => (
+              <tr key={key}>
+                <td>{key}</td>
+                <td>{value !== null ? value.toString() : "null"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

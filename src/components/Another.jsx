@@ -6,13 +6,7 @@ export const OtherForm = ({ setActiveTab }) => {
     category: "",
     urgency: "Низкая",
     description: "",
-    attachments: [],
   });
-
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, attachments: [...e.target.files] });
-    setFiles(Array.from(e.target.files));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -70,28 +64,6 @@ export const OtherForm = ({ setActiveTab }) => {
               required
             />
           </label>
-        </div>
-
-        <div className="form-group">
-          <label className="form-label">Приложить свитки:</label>
-          <div className="file-upload-wrapper">
-            <input
-              type="file"
-              id="file-upload"
-              className="file-input"
-              onChange={handleFileChange}
-              multiple
-            />
-            <label htmlFor="file-upload" className="file-upload-btn">
-              <span className="file-icon">📜</span>
-              Выберите изображения (опционально)
-            </label>
-            <span className="file-name">
-              {files.length > 0
-                ? `${files.length} файлов выбрано`
-                : "Ничего не выбрано"}
-            </span>
-          </div>
         </div>
 
         <div className="form-actions">

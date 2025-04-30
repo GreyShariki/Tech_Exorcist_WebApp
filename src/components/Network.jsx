@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const NetworkForm = ({ setActiveTab }) => {
   const [userData, setUserData] = useState(null);
