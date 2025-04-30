@@ -43,7 +43,7 @@ export const EquipmentForm = ({ setActiveTab }) => {
       alert("✅ Заявка создана! Мастера уведомлены.");
     } catch (error) {
       console.error("Ошибка:", error);
-      alert("❌ Ошибка при создании заявки");
+      alert(`❌ Ошибка при создании заявки ${error}`);
     }
   };
 
