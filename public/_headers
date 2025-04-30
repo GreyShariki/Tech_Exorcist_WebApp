@@ -1,0 +1,2 @@
+/*
+  Content-Security-Policy: default-src 'self'; connect-src http://87.228.82.41:3000 https://incomparable-medovik-4eb827.netlify.app/
