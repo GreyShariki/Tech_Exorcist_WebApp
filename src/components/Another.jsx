@@ -1,17 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { otherRequest, notifyManagers } from "./formBackend/Another";
 
 export const OtherForm = ({ setActiveTab }) => {
-  const [files, setFiles] = useState([]);
+  const [userData, setUserData] = useState(null);
+  const [isSending, setIsSending] = useState(false);
+
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      const user = tg.initDataUnsafe?.user;
+      setUserData(user);
+      tg.expand();
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     category: "",
     urgency: "Низкая",
     description: "",
+    chat_id: null,
+    status: "На рассмотрении",
   });
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (userData?.id) {
+      setFormData((prev) => ({ ...prev, chat_id: userData.id }));
+    }
+  }, [userData]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Отправка общей заявки:", formData);
-    alert("Ваше обращение попало в магический совет!");
+
+    if (!formData.chat_id) {
+      alert("Ошибка: не удалось идентифицировать пользователя");
+      return;
+    }
+
+    if (!formData.category || !formData.description) {
+      alert("Заполните обязательные поля: категория и описание");
+      return;
+    }
+
+    setIsSending(true);
+
+    try {
+      const createdApp = await otherRequest(formData);
+      await notifyManagers(createdApp);
+
+      alert("✅ Заявка создана! Ответственные уведомлены.");
+    } catch (error) {
+      console.error("Ошибка:", error);
+      alert(`❌ Ошибка при создании заявки: ${error.message}`);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -74,11 +116,33 @@ export const OtherForm = ({ setActiveTab }) => {
           >
             ← Назад
           </button>
-          <button type="submit" className="btn-seal">
-            Отправить в совет
+          <button type="submit" className="btn-seal" disabled={isSending}>
+            {isSending ? "Отправка..." : "Отправить в совет"}
           </button>
         </div>
       </form>
+
+      <div style={{ marginTop: "20px" }}>
+        <h3>Таблица для дебага:</h3>
+        <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th>Поле</th>
+              <th>Значение</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(formData).map(([key, value]) => (
+              <tr key={key}>
+                <td style={{ padding: "5px" }}>{key}</td>
+                <td style={{ padding: "5px" }}>
+                  {value !== null ? value.toString() : "null"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

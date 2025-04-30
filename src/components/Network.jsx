@@ -1,26 +1,34 @@
 import { useState, useEffect } from "react";
+import { networkRequest, notifyNetworkMasters } from "./formBackend/Network.js";
 
 export const NetworkForm = ({ setActiveTab }) => {
   const [userData, setUserData] = useState(null);
+  const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
-
       const user = tg.initDataUnsafe?.user;
       setUserData(user);
-
       tg.expand();
     }
   }, []);
+
   const [formData, setFormData] = useState({
     location: "Главный офис",
-    connectionType: "wifi",
+    connectionType: "Wi-fi",
     symptoms: [],
     description: "",
-    chat_id: userData,
+    chat_id: null,
     startTime: "",
+    status: "На рассмотрении",
   });
+
+  useEffect(() => {
+    if (userData?.id) {
+      setFormData((prev) => ({ ...prev, chat_id: userData.id }));
+    }
+  }, [userData]);
 
   const handleCheckboxChange = (e) => {
     const value = e.target.value;
@@ -32,17 +40,44 @@ export const NetworkForm = ({ setActiveTab }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Отправка сетевой заявки:", formData);
-    alert("Сигнал послан в магическую паутину!");
+
+    if (!formData.chat_id) {
+      alert("Ошибка: не удалось идентифицировать пользователя");
+      return;
+    }
+
+    if (!formData.description || !formData.startTime) {
+      alert("Заполните обязательные поля: описание и время начала проблемы");
+      return;
+    }
+
+    setIsSending(true);
+
+    try {
+      const requestData = {
+        ...formData,
+        signsStr: formData.symptoms.join(", "),
+      };
+
+      const createdApp = await networkRequest(requestData);
+      await notifyNetworkMasters(createdApp);
+
+      alert("✅ Заявка создана! Сетевые администраторы уведомлены.");
+    } catch (error) {
+      console.error("Ошибка:", error);
+      alert(`❌ Ошибка при создании заявки: ${error.message}`);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
     <div className="form-container">
       <h2 className="form-title">Свиток разрыва магической паутины</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="form-group">
           <label className="form-label">
             Локация:
@@ -86,8 +121,10 @@ export const NetworkForm = ({ setActiveTab }) => {
             <label>
               <input
                 type="checkbox"
-                value="slow"
-                checked={formData.symptoms.includes("slow")}
+                value="Медленная передача данных"
+                checked={formData.symptoms.includes(
+                  "Медленная передача данных"
+                )}
                 onChange={handleCheckboxChange}
               />
               Медленная передача данных
@@ -95,8 +132,8 @@ export const NetworkForm = ({ setActiveTab }) => {
             <label>
               <input
                 type="checkbox"
-                value="disconnect"
-                checked={formData.symptoms.includes("disconnect")}
+                value="Разрывы соединения"
+                checked={formData.symptoms.includes("Разрывы соединения")}
                 onChange={handleCheckboxChange}
               />
               Разрывы соединения
@@ -104,8 +141,8 @@ export const NetworkForm = ({ setActiveTab }) => {
             <label>
               <input
                 type="checkbox"
-                value="no_access"
-                checked={formData.symptoms.includes("no_access")}
+                value="Нет доступа в сеть"
+                checked={formData.symptoms.includes("Нет доступа в сеть")}
                 onChange={handleCheckboxChange}
               />
               Нет доступа в сеть
@@ -125,7 +162,19 @@ export const NetworkForm = ({ setActiveTab }) => {
             />
           </label>
         </div>
-
+        <div className="form-group">
+          <label className="form-label">
+            Подробное описание:
+            <textarea
+              className="form-textarea"
+              value={formData.description}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
+              required
+            />
+          </label>
+        </div>
         <div className="form-actions">
           <button
             type="button"
@@ -134,11 +183,36 @@ export const NetworkForm = ({ setActiveTab }) => {
           >
             ← Назад
           </button>
-          <button type="submit" className="btn-seal">
+          <button type="button" onClick={handleSubmit} className="btn-seal">
             Призвать сетевых магов
           </button>
         </div>
       </form>
+      <div style={{ marginTop: "20px" }}>
+        <h3>Таблица для дебага:</h3>
+        <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th>Поле</th>
+              <th>Значение</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(formData).map(([key, value]) => (
+              <tr key={key}>
+                <td style={{ padding: "5px" }}>{key}</td>
+                <td style={{ padding: "5px" }}>
+                  {Array.isArray(value)
+                    ? value.join(", ")
+                    : value !== null
+                    ? value.toString()
+                    : "null"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

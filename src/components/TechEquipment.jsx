@@ -51,7 +51,7 @@ export const EquipmentForm = ({ setActiveTab }) => {
     <div className="form-container">
       <h2 className="form-title">Свиток поломки артефактов</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="form-group">
           <label className="form-label">
             Тип оборудования:
