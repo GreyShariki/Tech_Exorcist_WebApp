@@ -12,19 +12,19 @@ export const accessRequest = async (data) => {
   return await response.json();
 };
 
-export const notifyAdmins = async (application) => {
-  const response = await fetch(
-    "http://87.228.82.41:3000/api/notify/notify-access",
-    {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ application }),
-    }
-  );
-  if (!response.ok) throw new Error(await response.text());
-  return await response.json();
-};
+// export const notifyAdmins = async (application) => {
+//   const response = await fetch(
+//     "http://87.228.82.41:3000/api/notify/notify-access",
+//     {
+//       method: "POST",
+//       mode: "cors",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Accept: "application/json",
+//       },
+//       body: JSON.stringify({ application }),
+//     }
+//   );
+//   if (!response.ok) throw new Error(await response.text());
+//   return await response.json();
+// };
