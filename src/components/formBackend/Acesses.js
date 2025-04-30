@@ -1,16 +1,13 @@
 export const accessRequest = async (data) => {
-  const response = await fetch(
-    "https://cors-anywhere.herokuapp.com/http://87.228.82.41:3000/api/addAccess",
-    {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ accessRequest: data }),
-    }
-  );
+  const response = await fetch("http://87.228.82.41:3000/api/addAccess", {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({ accessRequest: data }),
+  });
   if (!response.ok) throw new Error(await response.text());
   return await response.json();
 };
