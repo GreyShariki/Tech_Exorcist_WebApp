@@ -1,2 +1,8 @@
 /*
-  Content-Security-Policy: default-src 'self'; connect-src http://87.228.82.41:3000 https://incomparable-medovik-4eb827.netlify.app/
+  Content-Security-Policy: 
+    default-src 'self';
+    connect-src http://87.228.82.41:3000 https://incomparable-medovik-4eb827.netlify.app;
+    style-src 'self' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data:;
+    script-src 'self' 'unsafe-inline';  
