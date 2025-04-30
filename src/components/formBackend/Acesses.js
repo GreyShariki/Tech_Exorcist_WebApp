@@ -1,5 +1,12 @@
+const https = require("https");
+const fetch = require("node-fetch");
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
+
 export const accessRequest = async (data) => {
   const response = await fetch("https://87.228.82.41:3000/api/addAccess", {
+    agent,
     method: "POST",
     mode: "cors",
     headers: {
@@ -16,6 +23,7 @@ export const notifyAdmins = async (application) => {
   const response = await fetch(
     "https://87.228.82.41:3000/api/notify/notify-access",
     {
+      agent,
       method: "POST",
       mode: "cors",
       headers: {

@@ -1,5 +1,12 @@
+const https = require("https");
+const fetch = require("node-fetch");
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
+
 export const techRequest = async (data) => {
-  const response = await fetch("http://87.228.82.41:3000/api/addtech", {
+  const response = await fetch("https://87.228.82.41:3000/api/addtech", {
+    agent,
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ techRequest: data }),
@@ -10,8 +17,9 @@ export const techRequest = async (data) => {
 
 export const notifyMasters = async (application) => {
   const response = await fetch(
-    "http://87.228.82.41:3000/api/notify/notify-tech",
+    "https://87.228.82.41:3000/api/notify/notify-tech",
     {
+      agent,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ application }),
