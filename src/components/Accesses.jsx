@@ -65,7 +65,7 @@ export const AccessForm = ({ setActiveTab }) => {
       };
 
       const createdApp = await accessRequest(requestData);
-      // await notifyAdmins(createdApp);
+      await notifyAdmins(createdApp);
 
       alert("✅ Заявка создана! Администраторы уведомлены.");
     } catch (error) {
