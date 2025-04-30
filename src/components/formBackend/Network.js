@@ -1,5 +1,5 @@
 export const networkRequest = async (data) => {
-  const response = await fetch("http://localhost:3000/api/addNetwork", {
+  const response = await fetch("http://87.228.82.41:3000/api/addNetwork", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ networkRequest: data }),
@@ -10,7 +10,7 @@ export const networkRequest = async (data) => {
 
 export const notifyNetworkMasters = async (application) => {
   const response = await fetch(
-    "http://localhost:3000/api/notify/notify-network",
+    "http://87.228.82.41:3000/api/notify/notify-network",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

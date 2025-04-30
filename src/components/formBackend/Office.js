@@ -1,5 +1,5 @@
 export const officeRequest = async (data) => {
-  const response = await fetch("http://localhost:3000/api/addOffice", {
+  const response = await fetch("http://87.228.82.41:3000/api/addOffice", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ officeRequest: data }),
@@ -10,7 +10,7 @@ export const officeRequest = async (data) => {
 
 export const notifyOfficeManagers = async (application) => {
   const response = await fetch(
-    "http://localhost:3000/api/notify/notify-office",
+    "http://87.228.82.41:3000/api/notify/notify-office",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
