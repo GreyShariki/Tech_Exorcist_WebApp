@@ -3,10 +3,17 @@ export const accessRequest = async (data) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Cache-Control": "no-store, max-age=0",
+      "X-Content-Type-Options": "nosniff",
     },
     body: JSON.stringify({ accessRequest: data }),
   });
-  if (!response.ok) throw new Error(await response.text());
+  if (!response.ok) {
+    const errorText = await response.text();
+    alert(`API Error:${errorText}`);
+    throw new Error(errorText);
+  }
+
   return await response.json();
 };
 
@@ -15,9 +22,10 @@ export const notifyAdmins = async (application) => {
     "http://87.228.82.85:3000/api/notify/notify-access",
     {
       method: "POST",
-      mode: "cors",
       headers: {
         "Content-Type": "application/json",
+        "Cache-Control": "no-store, max-age=0",
+        "X-Content-Type-Options": "nosniff",
       },
       body: JSON.stringify({ application }),
     }
