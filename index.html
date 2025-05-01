@@ -16,7 +16,7 @@
       rel="stylesheet"
     />
 
-    <!-- <script src="https://telegram.org/js/telegram-web-app.js"></script>  -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
     <title>Vite + React</title>
     <style>
@@ -38,101 +38,104 @@
     <div id="root"></div>
     <script>
       // Улучшенный эмулятор Telegram WebApp
-      if (!window.Telegram?.WebApp) {
-        window.Telegram = {
-          WebApp: {
-            initData: "",
-            initDataUnsafe: {
-              user: {
-                id: 123456789,
-                first_name: "Dev",
-                last_name: "Tester",
-                username: "test_dev",
-                language_code: "en",
-                is_premium: true,
-              },
-              query_id: "test_query_id",
-            },
-            version: "6.7",
-            platform: "tdesktop",
-            themeParams: {
-              bg_color: "#18222d",
-              text_color: "#ffffff",
-              hint_color: "#b1c3d5",
-              button_color: "#2ea6ff",
-              button_text_color: "#ffffff",
-            },
-            backgroundColor: "#18222d",
-            headerColor: "#18222d",
-            isExpanded: true,
-            isVersionAtLeast: (version) => true,
-            expand: function () {
-              console.log("[WebApp Mock] expand()");
-              this.isExpanded = true;
-            },
-            ready: function () {
-              console.log("[WebApp Mock] ready()");
-            },
-            enableClosingConfirmation: function () {
-              console.log("[WebApp Mock] enableClosingConfirmation()");
-            },
-            showAlert: function (msg) {
-              console.log("[WebApp Mock] showAlert:", msg);
-              alert("[WebApp Mock] " + msg);
-            },
-            showConfirm: function (msg, callback) {
-              const result = confirm("[WebApp Mock] " + msg);
-              callback(result);
-            },
-            close: function () {
-              console.log("[WebApp Mock] close()");
-            },
-            sendData: function (data) {
-              console.log("[WebApp Mock] sendData:", data);
-            },
-            MainButton: {
-              text: "Submit",
-              isVisible: false,
-              isActive: true,
-              show: function () {
-                console.log("[WebApp Mock] MainButton.show()");
-                this.isVisible = true;
-              },
-              hide: function () {
-                console.log("[WebApp Mock] MainButton.hide()");
-                this.isVisible = false;
-              },
-              setText: function (text) {
-                console.log("[WebApp Mock] MainButton.setText:", text);
-                this.text = text;
-                return this;
-              },
-              onClick: function (callback) {
-                console.log("[WebApp Mock] MainButton.onClick handler set");
-                this.clickCallback = callback;
-              },
-              click: function () {
-                if (this.clickCallback) this.clickCallback();
-              },
-            },
-          },
-        };
+      //   if (!window.Telegram?.WebApp) {
+      //     window.Telegram = {
+      //       WebApp: {
+      //         initData: "",
+      //         initDataUnsafe: {
+      //           user: {
+      //             id: 123456789,
+      //             first_name: "Dev",
+      //             last_name: "Tester",
+      //             username: "test_dev",
+      //             language_code: "en",
+      //             is_premium: true,
+      //           },
+      //           query_id: "test_query_id",
+      //         },
+      //         version: "6.7",
+      //         platform: "tdesktop",
+      //         themeParams: {
+      //           bg_color: "#18222d",
+      //           text_color: "#ffffff",
+      //           hint_color: "#b1c3d5",
+      //           button_color: "#2ea6ff",
+      //           button_text_color: "#ffffff",
+      //         },
+      //         backgroundColor: "#18222d",
+      //         headerColor: "#18222d",
+      //         isExpanded: true,
+      //         isVersionAtLeast: (version) => true,
+      //         expand: function () {
+      //           console.log("[WebApp Mock] expand()");
+      //           this.isExpanded = true;
+      //         },
+      //         ready: function () {
+      //           console.log("[WebApp Mock] ready()");
+      //         },
+      //         enableClosingConfirmation: function () {
+      //           console.log("[WebApp Mock] enableClosingConfirmation()");
+      //         },
+      //         showAlert: function (msg) {
+      //           console.log("[WebApp Mock] showAlert:", msg);
+      //           alert("[WebApp Mock] " + msg);
+      //         },
+      //         showConfirm: function (msg, callback) {
+      //           const result = confirm("[WebApp Mock] " + msg);
+      //           callback(result);
+      //         },
+      //         close: function () {
+      //           console.log("[WebApp Mock] close()");
+      //         },
+      //         sendData: function (data) {
+      //           console.log("[WebApp Mock] sendData:", data);
+      //         },
+      //         MainButton: {
+      //           text: "Submit",
+      //           isVisible: false,
+      //           isActive: true,
+      //           show: function () {
+      //             console.log("[WebApp Mock] MainButton.show()");
+      //             this.isVisible = true;
+      //           },
+      //           hide: function () {
+      //             console.log("[WebApp Mock] MainButton.hide()");
+      //             this.isVisible = false;
+      //           },
+      //           setText: function (text) {
+      //             console.log("[WebApp Mock] MainButton.setText:", text);
+      //             this.text = text;
+      //             return this;
+      //           },
+      //           onClick: function (callback) {
+      //             console.log("[WebApp Mock] MainButton.onClick handler set");
+      //             this.clickCallback = callback;
+      //           },
+      //           click: function () {
+      //             if (this.clickCallback) this.clickCallback();
+      //           },
+      //         },
+      //       },
+      //     };
 
-        // Имитация инициализации
-        setTimeout(() => {
-          const event = new Event("Telegram.WebApp.ready");
-          window.dispatchEvent(event);
-          console.log("[WebApp Mock] Ready event dispatched");
+      //     // Имитация инициализации
+      //     setTimeout(() => {
+      //       const event = new Event("Telegram.WebApp.ready");
+      //       window.dispatchEvent(event);
+      //       console.log("[WebApp Mock] Ready event dispatched");
 
-          if (window.Telegram.WebApp.initDataUnsafe?.user) {
-            console.log(
-              "[WebApp Mock] User initialized:",
-              window.Telegram.WebApp.initDataUnsafe.user
-            );
-          }
-        }, 500);
-      }
+      //       if (window.Telegram.WebApp.initDataUnsafe?.user) {
+      //         console.log(
+      //           "[WebApp Mock] User initialized:",
+      //           window.Telegram.WebApp.initDataUnsafe.user
+      //         );
+      //       }
+      //     }, 500);
+      //   }
+      //
+      //
     </script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
