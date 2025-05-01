@@ -1,5 +1,7 @@
+import axios from "axios";
+
 export const accessRequest = async (data) => {
-  const response = await fetch("http://87.228.82.85:3000/api/addAccess", {
+  const response = axios.get("http://87.228.82.85:3000/api/addAccess", {
     method: "POST",
     credentials: "omit",
     referrerPolicy: "strict-origin-when-cross-origin",
