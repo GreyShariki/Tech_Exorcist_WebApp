@@ -1,10 +1,8 @@
 export const accessRequest = async (data) => {
   const response = await fetch("http://87.228.82.85:3000/api/addAccess", {
     method: "POST",
-    mode: "cors",
     headers: {
       "Content-Type": "application/json",
-      "X-Requested-With": "XMLHttpRequest",
     },
     body: JSON.stringify({ accessRequest: data }),
   });
@@ -20,7 +18,6 @@ export const notifyAdmins = async (application) => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest",
       },
       body: JSON.stringify({ application }),
     }
