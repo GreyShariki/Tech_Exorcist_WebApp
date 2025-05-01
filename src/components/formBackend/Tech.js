@@ -1,5 +1,5 @@
 export const techRequest = async (data) => {
-  const response = await fetch("http://87.228.82.85:3000/api/addtech", {
+  const response = await fetch("https://apikazakovm.ru/api/addtech", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -12,7 +12,7 @@ export const techRequest = async (data) => {
 
 export const notifyMasters = async (application) => {
   const response = await fetch(
-    "http://87.228.82.85:3000/api/notify/notify-tech",
+    "https://apikazakovm.ru/api/notify/notify-tech",
     {
       method: "POST",
       headers: {
