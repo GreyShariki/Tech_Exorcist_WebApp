@@ -3,10 +3,3 @@
   to = "http://87.228.82.85:3000/api/:splat"
   status = 200
   force = true
-  conditions = {Method = ["POST"]}  # Проксировать только POST-запросы
-
-[[redirects]]
-  from = "/api/*"
-  to = "http://87.228.82.85:3000/api/:splat"
-  status = 302
-  force = true
