@@ -1,8 +1,6 @@
 export const accessRequest = async (data) => {
   const response = await fetch("/api/addAccess", {
     method: "POST",
-    credentials: "omit",
-    mode: "no-cors",
     headers: {
       "Content-Type": "application/json",
     },
@@ -20,8 +18,6 @@ export const accessRequest = async (data) => {
 export const notifyAdmins = async (application) => {
   const response = await fetch("/api/notify/notify-access", {
     method: "POST",
-    credentials: "omit",
-    mode: "no-cors",
     headers: {
       "Content-Type": "application/json",
     },
