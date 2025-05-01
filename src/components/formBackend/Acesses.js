@@ -25,11 +25,9 @@ export const notifyAdmins = async (application) => {
     {
       method: "POST",
       credentials: "omit",
-      referrerPolicy: "strict-origin-when-cross-origin",
       headers: {
         "Content-Type": "application/json",
         "Cache-Control": "no-store, max-age=0",
-        "X-Content-Type-Options": "nosniff",
         "X-Requested-With": "XMLHttpRequest",
       },
       body: JSON.stringify({ application }),
