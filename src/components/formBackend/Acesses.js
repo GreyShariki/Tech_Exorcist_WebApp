@@ -1,27 +1,23 @@
-import axios from "axios";
-
 export const accessRequest = async (data) => {
-  try {
-    const response = await axios.post(
-      "http://87.228.82.85:3000/api/addAccess",
-      {
-        accessRequest: data,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Cache-Control": "no-store, max-age=0",
-          "X-Content-Type-Options": "nosniff",
-        },
-      }
-    );
-
-    return response.data;
-  } catch (error) {
-    const errorText = error.response?.data || error.message;
-    alert(`API Error: ${errorText}`);
+  const response = await fetch("http://87.228.82.85:3000/api/addAccess", {
+    method: "POST",
+    credentials: "omit",
+    referrerPolicy: "strict-origin-when-cross-origin",
+    headers: {
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store, max-age=0",
+      "X-Content-Type-Options": "nosniff",
+      "X-Requested-With": "XMLHttpRequest",
+    },
+    body: JSON.stringify({ accessRequest: data }),
+  });
+  if (!response.ok) {
+    const errorText = await response.text();
+    alert(`API Error:${errorText}`);
     throw new Error(errorText);
   }
+
+  return await response.json();
 };
 
 export const notifyAdmins = async (application) => {
