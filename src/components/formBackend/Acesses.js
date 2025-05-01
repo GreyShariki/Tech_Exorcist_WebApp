@@ -1,5 +1,5 @@
 export const accessRequest = async (data) => {
-  const response = await fetch("http://87.228.82.85:3000/api/addAccess", {
+  const response = await fetch("https://apikazakovm.ru/api/addAccess", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export const accessRequest = async (data) => {
 
 export const notifyAdmins = async (application) => {
   const response = await fetch(
-    "http://87.228.82.85:3000/api/notify/notify-access",
+    "https://apikazakovm.ru/api/notify/notify-access",
     {
       method: "POST",
 
