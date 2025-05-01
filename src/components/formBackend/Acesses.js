@@ -6,7 +6,6 @@ export const accessRequest = async (data) => {
     headers: {
       "Content-Type": "application/json",
       "Cache-Control": "no-store, max-age=0",
-      "X-Content-Type-Options": "nosniff",
       "X-Requested-With": "XMLHttpRequest",
     },
     body: JSON.stringify({ accessRequest: data }),
