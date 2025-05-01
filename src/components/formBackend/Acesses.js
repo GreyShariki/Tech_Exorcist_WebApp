@@ -1,5 +1,5 @@
 export const accessRequest = async (data) => {
-  const response = await fetch("/api/addAccess", {
+  const response = await fetch("http://87.228.82.85:3000/api/addAccess", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,13 +16,17 @@ export const accessRequest = async (data) => {
 };
 
 export const notifyAdmins = async (application) => {
-  const response = await fetch("/api/notify/notify-access", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ application }),
-  });
+  const response = await fetch(
+    "http://87.228.82.85:3000/api/notify/notify-access",
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ application }),
+    }
+  );
   if (!response.ok) throw new Error(await response.text());
   return await response.json();
 };
