@@ -185,27 +185,6 @@ export const AccessForm = ({ setActiveTab }) => {
           </button>
         </div>
       </form>
-      <div style={{ marginTop: "20px" }}>
-        <h3>Не люблю дебажить, но надо:</h3>
-        <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead>
-            <tr>
-              <th>Поле</th>
-              <th>Значение</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.entries(formData).map(([key, value]) => (
-              <tr key={key}>
-                <td style={{ padding: "5px" }}>{key}</td>
-                <td style={{ padding: "5px" }}>
-                  {value !== null ? value.toString() : "null"}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
     </div>
   );
 };

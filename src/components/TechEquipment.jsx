@@ -135,25 +135,6 @@ export const EquipmentForm = ({ setActiveTab }) => {
           </button>
         </div>
       </form>
-      <div>
-        <h3>Дебажим объект:</h3>
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Поле</th>
-              <th>Значение</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.entries(formData).map(([key, value]) => (
-              <tr key={key}>
-                <td>{key}</td>
-                <td>{value !== null ? value.toString() : "null"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
     </div>
   );
 };
